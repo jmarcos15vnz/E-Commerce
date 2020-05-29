@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ECommerce.WEB.Models;
 using ECommerce.Service.DTOs;
+using Newtonsoft.Json;
 
 namespace ECommerce.WEB.Controllers
 {
@@ -15,17 +16,10 @@ namespace ECommerce.WEB.Controllers
         {
             return View();
         }
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
         [HttpPost]
         public JsonResult GetUserLogin([FromBody] dynamic postData)
         {
-            ResponseBase response = postData;
-            response.Success = true;
-            return buildJsonResult(response);
+            return buildJsonResult(postData);
         }
     }
 }

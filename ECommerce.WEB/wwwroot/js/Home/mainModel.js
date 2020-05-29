@@ -17,25 +17,31 @@ function MainModel(model) {
             return;
         }
         var UserArray = [];
-        UserArray.push(self.UserEmail, self.UserPassword);
-        var data = {
-            user: UserArray
-        };
+        UserArray.push(self.UserEmail(), self.UserPassword());
 
+        var data = {
+            User: UserArray
+        };
+        JSON.stringify(data);
+       
         try {
-            Util.PostApi("../Home/GetUserLogin", null, null, self.HandleErrorCallback, true, true);
+            Util.PostApi("../Home/GetUserLogin", data, self.HandleSuccessCallback, self.HandleErrorCallback, true, true); 
         } catch (err) {
             responseBase = {
                 Success: false,
-                Message: err.Message
+                Message: err.message
             };
+            self.HandleErrorCallback(responseBase);
         }
     }
 
     self.HandleErrorCallback = function (result) {
-        if (result != undefined) {
-            StatusLoading.AppendStepWarning(result.Message)
+        if (!result.Success == true) {
+            Util.ShowErrorMessage('Deu algo errado');
         }
+    }
+    self.HandleSuccessCallback = () => {
+            Util.ShowSuccessMessage('Deu tudo certo');
     }
 }
 
