@@ -1,6 +1,5 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Microsoft.AspNetCore.Http;
+
 <html>
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -32,9 +31,10 @@
                     <h6 class="title-card center"><span class="material-icons" style="font-size:6rem">account_circle</span></h6>
                     <div class="card-content">
                         <label>Email</label>
-                        <input data-bind="value: txtEmail" class="input-field"  type="text" />
+                        <input class="input-field"  type="text" id="txtEmail" name="txtEmail"
+                               data-bind="value: UserEmail" />
                         <label>Senha</label>
-                        <input data-bind="value: txtPassword" class="input-field"  type="text" />
+                        <input data-bind="value: UserPassword" class="input-field"  type="password" />
                         <h1></h1>
                     </div>
                     <div class="card-action">
@@ -59,6 +59,7 @@
 @section scripts {
     <script src="~/js/Home/mainModel.js"></script>
     <script src="~/js/util.js"></script>
+    <script src="~/js/statusLoading.js"></script>
 
     <script type="text/javascript">
 
