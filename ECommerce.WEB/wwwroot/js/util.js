@@ -59,7 +59,7 @@ var Util = new function () {
         try {
             mc1.wtm.openForm(formName);
         }
-        catch{}        
+        catch{ }
     };
 
     this.WtmSetHeader = function (title, subTitle) {
@@ -220,12 +220,12 @@ var Util = new function () {
     // Validate Ajax result   ...@i
     //--------------------------------------------
     this.ValidateAjaxResult = function (result) {
-
-        if (result.Success != null && result.Success != undefined && result.Success == true)
+        if (result.success != null && result.success != undefined && result.success == true) {
             return true;
+        };
 
         // Error
-        Util.ShowErrorMessage(Util.BuildAjaxFailMessage(null, "", result.Message));
+        //Util.ShowErrorMessage(Util.BuildAjaxFailMessage(null, "teste joao", result.Message));
         return false;
     };
 
@@ -1290,11 +1290,10 @@ var Util = new function () {
             .done(function (result) {
 
                 if (Util.ValidateAjaxResult(result)) {
-
                     if (doneCallback) {
                         doneCallback(result);
                     }
-                } else if (!Util.IsNullOrEmpty(callErrorCallBackOnResultFalse)) {
+                } else if (!Util.IsNullOrEmpty(callErrorCallBackOnResultFalse) || callErrorCallBackOnResultFalse == undefined) {
 
                     if (!Util.IsNullOrEmpty(errorCallback))
                         errorCallback(result);
@@ -1379,7 +1378,7 @@ var Util = new function () {
     };
 
     this.GetValue = function (url, data, callbackReturnValue, errorCallback) {
-        return this.GetValue(url, data, callbackReturnValue, errorCallback,true)        
+        return this.GetValue(url, data, callbackReturnValue, errorCallback, true)
     };
 
 
@@ -1389,7 +1388,7 @@ var Util = new function () {
         if (showLoading) {
             Util.ShowLoading();
         }
-        
+
 
         $.ajax({
             type: 'POST',
@@ -1404,11 +1403,11 @@ var Util = new function () {
                         callbackReturnValue(result.Data);
                 }
                 else {
-                   
-                    if (!Util.IsNullOrEmpty(errorCallback)) {                        
+
+                    if (!Util.IsNullOrEmpty(errorCallback)) {
                         errorCallback();
                     }
-                    
+
                 }
                 if (showLoading) {
                     Util.HideLoading();
@@ -1418,10 +1417,10 @@ var Util = new function () {
                 if (showLoading) {
                     Util.HideLoading();
                 }
-                if (!Util.IsNullOrEmpty(errorCallback)) {                   
+                if (!Util.IsNullOrEmpty(errorCallback)) {
                     errorCallback();
                 }
-                    
+
 
                 Util.ShowErrorMessage(Util.BuildAjaxFailMessage(jqXHR, textStatus, errorThrown));
             });

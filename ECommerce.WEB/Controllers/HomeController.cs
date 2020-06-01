@@ -7,11 +7,21 @@ using Microsoft.AspNetCore.Mvc;
 using ECommerce.WEB.Models;
 using ECommerce.Service.DTOs;
 using Newtonsoft.Json;
+using ECommerce.Service.Interfaces;
+using ECommerce.Repository.EF.DBContext;
 
 namespace ECommerce.WEB.Controllers
 {
     public class HomeController : BaseController
     {
+        private IUserLoginService _userloginService;
+
+        public HomeController(
+            IUserLoginService userLoginService
+        )
+        {
+            this._userloginService = userLoginService;
+        }
         public IActionResult Index()
         {
             return View();
@@ -19,7 +29,12 @@ namespace ECommerce.WEB.Controllers
         [HttpPost]
         public JsonResult GetUserLogin([FromBody] dynamic postData)
         {
-            return buildJsonResult(postData);
+            ResponseBase result;
+            string userEmail = postData.Name.ToString();
+            string userPass = postData.Pass.ToString();
+
+            result = _userloginService.CheckUserCredentials(userEmail.ToString(), userPass.ToString()); 
+            return buildJsonResult(result);
         }
     }
 }

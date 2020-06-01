@@ -30,42 +30,41 @@
                 <div id="formMain" class="card-panel">
                     <h6 class="title-card center"><span class="material-icons" style="font-size:6rem">account_circle</span></h6>
                     <div class="card-content">
+                        <label>Nome</label>
+                        <input class="input-field" type="text" id="NameUser" name="NameUser" 
+                               data-bind="value: NameUser"/>
                         <label>Email</label>
-                        <input class="input-field"  type="text" id="txtEmail" name="txtEmail"
-                               data-bind="value: UserEmail" />
+                        <input class="input-field" type="text" id="EmailUser" name="EmailUser"
+                               data-bind="value: EmailUser" />
                         <label>Senha</label>
-                        <input class="input-field" type="password" id="txtPassword" name="txtPassword"
-                               data-bind="value: UserPassword"  />
+                        <input class="input-field" type="password" id="PasswordUser" name="PasswordUser"
+                               data-bind="value: PasswordUser" />
                         <h1></h1>
+                        <div class="card-action">
+                            <button data-bind="click:OnClickNewUser"
+                                    class="waves-effect waves-light btn"
+                                    href="#">
+                                <i class="material-icons right">save</i>
+                                Salvar
+                            </button>
+                        </div>
+                        &nbsp
                     </div>
-                    <div class="card-action">
-                        <button data-bind="click:OnClickLogin"
-                                class="waves-effect waves-light btn"
-                                href="#">
-                            <i class="material-icons right">send</i>
-                            Login
-                        </button>
-                    </div>
-                    <a href="#" style="float:right"
-                       data-bind="click:RegisterNewUser"
-                       >Cadastre-se</a>
-                    &nbsp
-                </div>
             </div>
             <div class="col s4"></div>
         </div>
     </div>
-
+</div>
 </body>
 </html>
 
 @section scripts {
-    <script src="~/js/Home/mainModel.js"></script>
+    <script src="~/js/NewUser/mainModel.js"></script>
     <script src="~/js/util.js"></script>
 
     <script type="text/javascript">
 
-            
+
         ko.bindingHandlers.materialSelectEnabled = {
             update: function (element, valueAccessor) {
                 var value = valueAccessor();
